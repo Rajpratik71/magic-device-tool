@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errexit
+set -o nounset
+
 . tools/color.sh
 
 clear
@@ -12,7 +15,7 @@ echo -n "  → $1: "
 if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -eq 0 ];
 then
   echo_yellow "not found, installing..."
-  if [[ ! -z $2 ]]
+  if [[ ! -z ${2:-} ]]
   then
     echo "Adding necessary apt repository: $2"
     sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa

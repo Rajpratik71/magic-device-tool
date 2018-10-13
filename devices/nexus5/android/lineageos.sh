@@ -42,7 +42,6 @@ then
   echo "Downloading Open Gapps.."
   echo ""
   sleep 1
-
   wget -c --quiet --show-progress --tries=10 -P $HOME/.cache/magic-device-tool/ http://mdt-files.com/downloads/magic-device-tool/gapps/open_gapps-arm-7.1-nano-20170603.zip
   sleep 2
   clear

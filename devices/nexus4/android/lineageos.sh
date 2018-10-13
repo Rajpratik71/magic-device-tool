@@ -1,3 +1,4 @@
+# original https://github.com/MariusQuabeck/magic-device-tool/pull/107/commits/7fb3f87db0887c2786f550ea1b80cb46428cc280
 clear
 echo ""
 echo "Installing LineageOS 14.1"

@@ -24,7 +24,8 @@ fi
     echo ""
     wget -c --quiet --show-progress --tries=10 -P $HOME/.cache/magic-device-tool/ https://dl.google.com/dl/android/aosp/hammerhead-m4b30x-factory-10cfaa5c.zip
     sleep 1
-    unzip $HOME/.cache/magic-device-tool/hammerhead*
+    LOSLINK=$HOME/.cache/magic-device-tool
+    unzip $LOSLINK/hammerhead* -d $LOSLINK
     sleep 1
     fastboot flash bootloader $HOME/.cache/magic-device-tool/hammerhead-m4b30x/bootloader-hammerhead-hhz20h.img
     fastboot reboot-bootloader

@@ -1,3 +1,4 @@
+# original https://github.com/MariusQuabeck/magic-device-tool/pull/107/commits/7fb3f87db0887c2786f550ea1b80cb46428cc280
 clear
 echo ""
 echo "Installing LineageOS 14.1"
@@ -36,7 +37,9 @@ then
   echo "Downloading LineageOS 14.1.."
   echo ""
   sleep 1
-  wget -c --quiet --show-progress --tries=10 -P $HOME/.cache/magic-device-tool/ https://mirrorbits.lineageos.org//full/mako/20171207/lineage-14.1-20171207-nightly-mako-signed.zip
+  LOSLINK=$(wget -qO- https://download.lineageos.org/mako | sed -n 's/.*href="\([^"]*\.zip\).*/\1/p' | head -n1)
+  LOSZIP=${LOSLINK##*/}
+  wget -c --quiet --show-progress --tries=10 -P $HOME/.cache/magic-device-tool/ $LOSLINK
   echo ""
   echo "Downloading Open Gapps.."
   echo ""
@@ -72,7 +75,8 @@ then
   echo "Ignore that prompt, the tool will take care of the installation"
   echo ""
   echo "  → LineageOS 14.1 zip "
-  adb push -p $HOME/.cache/magic-device-tool/lineage-14.1-20171207-nightly-mako-signed.zip /sdcard/
+  LOSPATH="$HOME/.cache/magic-device-tool/$LOSZIP"
+  adb push -p $LOSPATH /sdcard/
   echo ""
   echo "  → open gapps zip"
   adb push -p $HOME/.cache/magic-device-tool/open_gapps-arm-7.1-nano-20170603.zip /sdcard/
@@ -82,7 +86,8 @@ then
   echo ""
   echo "Installing LineageOS.."
   echo ""
-  adb shell twrp install /sdcard/lineage-14.1-20171207-nightly-mako-signed.zip
+  INSTALLPATH="/sdcard/$LOSZIP"
+  adb shell twrp install $INSTALLPATH
   sleep 1
   echo ""
   echo "Installing Open GApps.."
